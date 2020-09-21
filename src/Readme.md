@@ -1,4 +1,4 @@
-#Wizards of the Nether
+# Wizards of the Nether
 ##  Minecraft Mod
 ####  Class System
 * Fighter
