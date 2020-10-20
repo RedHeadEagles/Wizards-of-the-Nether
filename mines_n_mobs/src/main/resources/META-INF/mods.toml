@@ -1,0 +1,21 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+
+[[mods]]
+modId="mines_n_mobs"
+version="0.0.0"
+displayName="Mines N Mobs"
+credits="For CS:371. Group: Wizards of the Nether."
+displayURL="https://jaymay284.github.io/CS-Project-Site/"
+authors="blongwell, bwidner, lbrandes, wmorlan"
+
+[[dependencies.mines_n_mobs]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"
+
+
+
+

@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "mines_n_mobs:items/diamonddagger"
+  }
+}
