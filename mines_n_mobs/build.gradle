@@ -11,7 +11,7 @@ buildscript {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 
-version = '0.0.0'
+version = '0.1'
 group = 'com.wizards_of_the_nether.mines_n_mobs'
 archivesBaseName = 'mines_n_mobs'
 
