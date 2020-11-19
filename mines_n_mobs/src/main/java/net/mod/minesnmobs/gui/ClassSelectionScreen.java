@@ -3,13 +3,20 @@ package net.mod.minesnmobs.gui;
 import net.minecraft.client.gui.screen.ConfirmOpenLinkScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
+import net.mod.minesnmobs.item.ClassSelectorItem;
 
 public class ClassSelectionScreen extends Screen {
+	private final PlayerEntity player;
 	
-	public ClassSelectionScreen(ITextComponent titleIn) {
+	public ClassSelectionScreen(ITextComponent titleIn, PlayerEntity playerIn) {
 		super(titleIn);
+		player = playerIn;
 	}
 
 	protected void init()
@@ -20,31 +27,31 @@ public class ClassSelectionScreen extends Screen {
 	private void addButtons()
 	{
 		this.addButton(new Button(this.width / 2 - 102, this.height / 4, 204, 20, "Fighter", (p_213063_1_) -> {
-         this.minecraft.displayGuiScreen(new ConfirmOpenLinkScreen((p_213064_1_) -> {
-            if (p_213064_1_) {
-               Util.getOSType().openURI("https://google.com");
-            }
-
-            this.minecraft.displayGuiScreen(this);
-         }, "https://google.com", true));
+			CompoundNBT playerData = player.getPersistentData();
+			if(!playerData.contains("class"))
+			{
+				playerData.putString("class", "fighter");
+				player.sendMessage(new StringTextComponent(player.getName().getString() + " class set to Fighter"));
+			}
+			this.onClose();
         }));
 		this.addButton(new Button(this.width / 2 - 102, this.height / 4 + 32, 204, 20, "Cleric", (p_213063_1_) -> {
-	         this.minecraft.displayGuiScreen(new ConfirmOpenLinkScreen((p_213064_1_) -> {
-	            if (p_213064_1_) {
-	               Util.getOSType().openURI("https://google.com");
-	            }
-
-	            this.minecraft.displayGuiScreen(this);
-	         }, "https://google.com", true));
+			CompoundNBT playerData = player.getPersistentData();
+			if(!playerData.contains("class"))
+			{
+				playerData.putString("class", "cleric");
+				player.sendMessage(new StringTextComponent(player.getName().getString() + " class set to Cleric"));
+			}
+			this.onClose();
 	    }));
 		this.addButton(new Button(this.width / 2 - 102, this.height / 4 + 64, 204, 20, "Rogue", (p_213063_1_) -> {
-	         this.minecraft.displayGuiScreen(new ConfirmOpenLinkScreen((p_213064_1_) -> {
-	            if (p_213064_1_) {
-	               Util.getOSType().openURI("https://google.com");
-	            }
-
-	            this.minecraft.displayGuiScreen(this);
-	         }, "https://google.com", true));
+			CompoundNBT playerData = player.getPersistentData();
+			if(!playerData.contains("class"))
+			{
+				playerData.putString("class", "rogue");
+				player.sendMessage(new StringTextComponent(player.getName().getString() + " class set to Rogue"));
+			}
+			this.onClose();
 	      }));
 	}
 

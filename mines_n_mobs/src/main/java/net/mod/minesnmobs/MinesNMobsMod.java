@@ -1,6 +1,7 @@
 package net.mod.minesnmobs;
 
 import net.minecraftforge.fml.network.simple.SimpleChannel;
+import net.mod.minesnmobs.item.ClassSelectorItem;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -9,14 +10,19 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.api.distmarker.Dist;
 
 import net.minecraft.world.biome.Biome;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.block.Block;
 
@@ -49,7 +55,21 @@ public class MinesNMobsMod {
 	public void clientLoad(FMLClientSetupEvent event) {
 		elements.getElements().forEach(element -> element.clientLoad(event));
 	}
-
+	
+	@SubscribeEvent
+	public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event)
+	{
+		CompoundNBT playerData = event.getPlayer().getPersistentData();
+		if(!playerData.contains("first"))
+		{
+			event.getPlayer().inventory.addItemStackToInventory(new ItemStack(ClassSelectorItem.block));
+		}
+		else
+		{
+			playerData.putBoolean("first", true);
+		}
+	}
+	
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
 		event.getRegistry().registerAll(elements.getBlocks().stream().map(Supplier::get).toArray(Block[]::new));
