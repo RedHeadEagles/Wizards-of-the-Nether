@@ -24,12 +24,12 @@ public class ClassSelectorItem extends MinesNMobsModElements.ModElement {
 
 	@Override
 	public void initElements() {
-		elements.items.add(() -> new Item(new Item.Properties().group(ItemGroup.MISC)) {
+		elements.items.add(() -> new Item(new Item.Properties().maxStackSize(1).group(ItemGroup.MISC)) {
 			@Override
 			public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 				ITextComponent i = new StringTextComponent("Select your class:");
-				Minecraft.getInstance().displayGuiScreen(new ClassSelectionScreen(i));
-				return ActionResult.resultPass(playerIn.getHeldItem(handIn));
+				Minecraft.getInstance().displayGuiScreen(new ClassSelectionScreen(i, playerIn));
+				return ActionResult.resultPass(ItemStack.EMPTY);
 			   }
 		}.setRegistryName("class_selector"));
 	}
