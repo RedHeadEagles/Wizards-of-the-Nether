@@ -64,6 +64,8 @@ public class IronDaggerItem extends MinesNMobsModElements.ModElement {
 				{
 					Map<String, Object> $_dependencies = new HashMap<>();
 					$_dependencies.put("entity", entity);
+					//Add player to dependencies
+					$_dependencies.put("player", sourceentity);
 					BackstabProcedure.executeProcedure($_dependencies);
 				}
 				return retval;
