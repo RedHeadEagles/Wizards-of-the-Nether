@@ -26,6 +26,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.block.Block;
 
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.util.text.StringTextComponent;
+
 import java.util.function.Supplier;
 
 @Mod("mines_n_mobs")
@@ -59,16 +63,26 @@ public class MinesNMobsMod {
 	@SubscribeEvent
 	public void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event)
 	{
+		PlayerEntity entityPlayer = event.getPlayer();
 		CompoundNBT playerData = event.getPlayer().getPersistentData();
-		if(!playerData.contains("first"))
-		{
+		if(!playerData.contains("first")) {
+			event.getPlayer().sendMessage(new StringTextComponent(event.getPlayer().getName().getString() + " Adding item to inventory"));
 			event.getPlayer().inventory.addItemStackToInventory(new ItemStack(ClassSelectorItem.block));
-		}
-		else
-		{
 			playerData.putBoolean("first", true);
 		}
-	}
+		else{
+			playerData.putBoolean("first", true);
+
+			if (playerData.getString("class").equals("cleric")){
+				entityPlayer.sendMessage(new StringTextComponent(entityPlayer.getName().getString() + "giving player regen because they are a cleric"));
+				entityPlayer.addPotionEffect(new EffectInstance(Effects.REGENERATION, (int) 1000000, (int) 1));
+			}//end if
+			if (playerData.getString("class").equals("fighter")){
+				entityPlayer.sendMessage(new StringTextComponent(entityPlayer.getName().getString() + "giving player resist because they are a fighter"));
+				event.getPlayer().addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 1000000, (int) 1));
+			}//end if
+		}//end else
+	}//end onPlayerJoin
 	
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
