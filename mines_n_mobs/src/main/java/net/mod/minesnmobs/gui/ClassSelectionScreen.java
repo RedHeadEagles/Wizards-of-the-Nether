@@ -10,6 +10,8 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.mod.minesnmobs.item.ClassSelectorItem;
+import net.minecraft.potion.Effects;
+import net.minecraft.potion.EffectInstance;
 
 public class ClassSelectionScreen extends Screen {
 	private final PlayerEntity player;
@@ -31,7 +33,9 @@ public class ClassSelectionScreen extends Screen {
 			if(!playerData.contains("class"))
 			{
 				playerData.putString("class", "fighter");
+				player.addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 1000000, (int) 1));
 				player.sendMessage(new StringTextComponent(player.getName().getString() + " class set to Fighter"));
+
 			}
 			this.onClose();
         }));
@@ -40,6 +44,7 @@ public class ClassSelectionScreen extends Screen {
 			if(!playerData.contains("class"))
 			{
 				playerData.putString("class", "cleric");
+				player.addPotionEffect(new EffectInstance(Effects.REGENERATION, (int) 1000000, (int) 1));
 				player.sendMessage(new StringTextComponent(player.getName().getString() + " class set to Cleric"));
 			}
 			this.onClose();
