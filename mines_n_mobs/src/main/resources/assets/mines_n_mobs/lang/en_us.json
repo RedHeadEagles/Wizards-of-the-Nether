@@ -3,5 +3,6 @@
   "item.mines_n_mobs.stone_dagger": "Stone Dagger",
   "item.mines_n_mobs.gold_dagger": "Gold Dagger",
   "item.mines_n_mobs.wooden_dagger": "Wooden Dagger",
-  "item.mines_n_mobs.iron_dagger": "Iron Dagger"
+  "item.mines_n_mobs.iron_dagger": "Iron Dagger",
+  "item.mines_n_mobs.class_selector": "Class Selector"
 }
