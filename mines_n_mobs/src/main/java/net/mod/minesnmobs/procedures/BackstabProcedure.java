@@ -8,6 +8,7 @@ import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.DamageSource;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.CompoundNBT;
 
 import java.util.Map;
 import java.lang.Math;
@@ -23,10 +24,11 @@ public class BackstabProcedure extends MinesNMobsModElements.ModElement {
 			System.err.println("Failed to load dependency entity for procedure Backstab!");
 			return;
 		}
-		//mob hit
+		
 		Entity entity = (Entity) dependencies.get("entity");
 		//player
 		Entity sourceentity = (Entity) dependencies.get("player");
+		CompoundNBT playerData = sourceentity.getPersistentData();
 		//get and set the yaw values
 		int pYaw = 0;
 		pYaw = (int) sourceentity.rotationYaw;
@@ -35,15 +37,19 @@ public class BackstabProcedure extends MinesNMobsModElements.ModElement {
 		//compare the yaws for backstab
 		if(Math.abs(pYaw - mYaw) <= 30) {
 			//backstab and print the yaw diff
-			MinecraftServer mcserv = ServerLifecycleHooks.getCurrentServer();
-			if (mcserv != null) mcserv.getPlayerList().sendMessage(new StringTextComponent("player Yaw: " + pYaw + " monster yaw: " + mYaw ));
-			entity.attackEntityFrom(DamageSource.GENERIC, (float) 25);
+			if (playerData.getString("class").equals("rogue")){
+				//MinecraftServer mcserv = ServerLifecycleHooks.getCurrentServer();
+				//if (mcserv != null) mcserv.getPlayerList().sendMessage(new StringTextComponent(": IS ROGUE 1 player Yaw: " + pYaw + " monster yaw: " + mYaw ));
+				entity.attackEntityFrom(DamageSource.GENERIC, (float) 25);
+			}//end if
 		}
 		else if((pYaw < 20 || pYaw > 340) && (mYaw < 20 || mYaw > 340)) {
 			//backstab and print the yaw diff / values
-			MinecraftServer mcserv = ServerLifecycleHooks.getCurrentServer();
-			if (mcserv != null) mcserv.getPlayerList().sendMessage(new StringTextComponent("player Yaw: " + pYaw + " monster yaw: " + mYaw ));
-			entity.attackEntityFrom(DamageSource.GENERIC, (float) 25);
+			if (playerData.getString("class").equals("rogue")){
+				//MinecraftServer mcserv = ServerLifecycleHooks.getCurrentServer();
+				//if (mcserv != null) mcserv.getPlayerList().sendMessage(new StringTextComponent(": IS ROGUE 2 player Yaw: " + pYaw + " monster yaw: " + mYaw ));
+				entity.attackEntityFrom(DamageSource.GENERIC, (float) 25);
+			}//end if
 		}//end elif
 		
 	}
