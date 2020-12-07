@@ -38,6 +38,8 @@ import net.minecraft.util.text.StringTextComponent;
 
 import java.util.function.Supplier;
 
+import org.lwjgl.glfw.GLFW;
+
 @Mod("mines_n_mobs")
 public class MinesNMobsMod {
 	private static final String PROTOCOL_VERSION = "1";
@@ -125,23 +127,46 @@ public class MinesNMobsMod {
 
 	public static void register()
 	{
-		special = new KeyBinding("key.mines_n_mobs.special", 37, "key.categories.gameplay");
+		special = new KeyBinding("key.mines_n_mobs.special", GLFW.GLFW_KEY_V, "key.categories.gameplay");
 	}
 
 	@SubscribeEvent
 	public void onKeyInput(InputEvent.KeyInputEvent event)
 	{
+
 		PlayerEntity p = Minecraft.getInstance().player;
 		CompoundNBT playerData = p.getPersistentData();
+
+//		p.sendMessage(new StringTextComponent(p.getName().getString() + "giving player regen because they are a cleric"));
+
+//		p.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, 1000, 1));
+
+		if (playerData.getString("class").equals("cleric")){
+			p.sendMessage(new StringTextComponent(p.getName().getString() + "giving player regen because they are a cleric"));
+			p.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, (int) 1000000, (int) 1));
+		}
+		else if (playerData.getString("class").equals("fighter")){
+			p.sendMessage(new StringTextComponent(p.getName().getString() + "giving player regen because they are a cleric"));
+			p.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, (int) 1000000, (int) 1));
+		}
+		else if (playerData.getString("class").equals("rogue")){
+
+			p.sendMessage(new StringTextComponent(p.getName().getString() + "giving player regen because they are a cleric"));
+			p.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, (int) 1000000, (int) 1));
+		}
+
+
+
 		if(special.isPressed())
 		{
+			p.sendMessage(new StringTextComponent(playerData.getString("class")));
 			if (playerData.getString("class").equals("cleric")){
 				p.sendMessage(new StringTextComponent(p.getName().getString() + "giving player regen because they are a cleric"));
-				p.addPotionEffect(new EffectInstance(Effects.REGENERATION, (int) 1000000, (int) 1));
+				p.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, (int) 1000000, (int) 1));
 			}
-			else if (playerData.getString("class").equals("warrior")){
+			else if (playerData.getString("class").equals("fighter")){
 				p.sendMessage(new StringTextComponent(p.getName().getString() + "giving player regen because they are a cleric"));
-				p.addPotionEffect(new EffectInstance(Effects.RESISTANCE, (int) 1000000, (int) 1));
+				p.addPotionEffect(new EffectInstance(Effects.INVISIBILITY, (int) 1000000, (int) 1));
 			}
 			else if (playerData.getString("class").equals("rogue")){
 
