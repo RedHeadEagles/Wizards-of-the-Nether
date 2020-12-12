@@ -6,6 +6,14 @@ Minecraft Mod
 * Rogue
 * Cleric
 
+## HOW TO INSTALL / USE
+* All our system runs from root(Wizards-of-the-Nether)/mines_n_mobs
+* Anything in this mines_n_mobs folder is our code EXCEPT for the gradle files which were provided in the blank mod template.
+* To find the bulk of our code, you should check in the mines_n_mobs/src folder where all our java files are. These are the files where we actually implemented change to the Minecraft environment. In the /src folder you will also find some json scripting as well as some art that we had to create for our mod. 
+* To effectively view / edit this mod, simply import the mines_n_mobs folder as a gradle project in Eclipse IDE (or any other IDE that supports gradle projects.
+* To build / compile our code, in the "Gradle Tasks" tab (assuming you are using Eclipse IDE), in the "build" folder, double click "build". This will send a JAR file to the "mines_n_mobs/build/libs" folder, as of the recent release, you should see a file called "mines_n_mobs-1.0.jar". This folder can be placed in your minecraft "mods" folder wherever that may be, assuming you have the proper version of forge installed, (1.15.2-31.2.0).
+* To install our project, you can place this JAR file into the "mods" folder of your Forge-Installed Minecraft. (Again, assuming you have forge downlaoded.)
+
 ####  [Project Website](https://jaymay284.github.io/CS-Project-Site/)
 ### v0.1
 NEW:
