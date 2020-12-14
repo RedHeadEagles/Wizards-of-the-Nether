@@ -14,7 +14,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.potion.EffectInstance;
 
 public class ClassSelectionScreen extends Screen {
-	private final PlayerEntity player;
+	private PlayerEntity player;
 	
 	public ClassSelectionScreen(ITextComponent titleIn, PlayerEntity playerIn) {
 		super(titleIn);
